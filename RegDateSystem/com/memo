@@ -1,0 +1,34 @@
+	public int edit(UploadVO vo) {
+		int result =0;
+		
+		sql = "select * from upload where upload_no=?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, vo.getUpload_no);
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			if(vo.getUpload_pwd.equals(rs.getInt("upload_pwd"))) {
+				sql = "update RegDateSystem "
+						+ "set upload_name=?,"
+						+ "upload_class=?,"
+						+ "upload_tel=?,"
+						+ "upload_writer=?,"
+						+ "upload_comment=? "
+						+ "where upload_no=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, vo.getUpload_name());
+				pstmt.setString(2, vo.getUpload_class());
+				pstmt.setString(3, vo.getUpload_tel());
+				pstmt.setString(4, vo.getUpload_writer());
+				pstmt.setString(5, vo.getUpload_comment());
+				pstmt.setString(6, vo.getUpload_no());
+				result = pstmt.executeUpdate();
+			}else {
+				result =1;
+			}
+			
+			rs.close(); pstmt.close(); con.close();
+		}
+		
+		return result;	
+	}
