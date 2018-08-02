@@ -1,4 +1,4 @@
-package com.RegDate.View;
+package com.RegDate.Action;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.Regdate.Model.UploadDAO;
 import com.Regdate.Model.UploadVO;
 
-public class EditReservationOK implements Reservation{
+public class EditOkAction implements Action{
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -78,14 +78,14 @@ public class EditReservationOK implements Reservation{
 		int res = dao.insertUpload(vo);
 		PrintWriter out = response.getWriter();
 		
-		if(res > 0) {  // 데이터가 성공적으로 저장된 경우
+		if(res > 0) {  // �뜲�씠�꽣媛� �꽦怨듭쟻�쑝濡� ���옣�맂 寃쎌슦
 			out.println("<script>");
-			out.println("alert('예약되었습니다!')");
+			out.println("alert('�삁�빟�릺�뿀�뒿�땲�떎!')");
 			out.println("location.href='select.do'");
 			out.println("</script>");
 		}else {
 			out.println("<script>");
-			out.println("alert('예약실패...ㅠ')");
+			out.println("alert('�삁�빟�떎�뙣...�뀪')");
 			out.println("history.back()");
 			out.println("</script>");
 		}

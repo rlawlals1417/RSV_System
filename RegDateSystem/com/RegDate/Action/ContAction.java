@@ -1,9 +1,9 @@
-package com.RegDate.View;
+package com.RegDate.Action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ReservationCont implements Reservation{
+public class ContAction	implements Action {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {

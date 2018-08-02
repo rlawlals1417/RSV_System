@@ -1,4 +1,4 @@
-package com.RegDate.View;
+package com.RegDate.Action;
 
 import java.io.PrintWriter;
 
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.RegDate.Model.UploadDAO
 
-public class CancelReservationOK implements Reservation {
+public class CancelokAction implements Action {
 	
 	@Override
 	public void execute(HttpServletRequest request,HttpServletResponse response) {
@@ -26,7 +26,7 @@ public class CancelReservationOK implements Reservation {
 		
 		if(!upload_pwd.equals(db_pwd)) {
 			out.println("<script>");
-			out.println("alert('잘못된 패스워드입니다.')");
+			out.println("alert('�옒紐삳맂 �뙣�뒪�썙�뱶�엯�땲�떎.')");
 			out.println("history.back()");
 			out.println("</script>");
 			
@@ -37,7 +37,7 @@ public class CancelReservationOK implements Reservation {
 			
 		
 		out.println("<script>");
-		out.println("alert('게시물 삭제 성공')");
+		out.println("alert('寃뚯떆臾� �궘�젣 �꽦怨�')");
 		out.println("location.href='select.do'");
 		out.println("</script>");
 

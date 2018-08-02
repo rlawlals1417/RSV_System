@@ -1,12 +1,16 @@
-package com.RegDate.View;
+package com.RegDate.Action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CancelReservation implements Reservation{
+import com.RegDate.Model.UploadDAO;
+import com.RegDate.Model.UploadVO;
+
+
+public class EditAction implements Action{
 	
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public void execute(HttpServletRequest request,HttpServletResponse response) {
 		
 		int upload_no = Integer.parseInt(request.getParameter("no"));
 		
@@ -17,4 +21,6 @@ public class CancelReservation implements Reservation{
 		
 		
 	}
+	
+	
 }

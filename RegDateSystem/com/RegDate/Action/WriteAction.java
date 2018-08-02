@@ -1,4 +1,4 @@
-package com.RegDate.View;
+package com.RegDate.Action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +7,7 @@ import com.RegDate.Model.UploadDAO;
 import com.RegDate.Model.UploadVO;
 
 
-public class EditReservation implements Reservation{
+public class WriteAction implements Action {
 	
 	@Override
 	public void execute(HttpServletRequest request,HttpServletResponse response) {
