@@ -1,0 +1,14 @@
+jdbc:oracle:thin:@server:1521:RSV_System
+
+
+1) system계정으로 로그인
+c:\> sqlplus "/as sysdba"
+
+2) 변경하려는 사용자 패스워드 변경하기
+alter user 유저명 identified by 변경할패스워드;
+ex)
+alter user ahn identified by 1234567;
+
+3. 작업결과
+
+출처: http://happytomorrow.net/117 [開發]

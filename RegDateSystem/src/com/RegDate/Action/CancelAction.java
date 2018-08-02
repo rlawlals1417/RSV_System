@@ -1,16 +1,16 @@
 package com.RegDate.Action;
 
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.RegDate.Model.UploadDAO;
 import com.RegDate.Model.UploadVO;
 
 
-public class WriteOkAction implements Action {
+public class CancelAction implements Action{
 	
 	@Override
-	public void execute(HttpServletRequest request,HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		int upload_no = Integer.parseInt(request.getParameter("no"));
 		
@@ -21,6 +21,4 @@ public class WriteOkAction implements Action {
 		
 		
 	}
-	
-	
 }

@@ -8,10 +8,5 @@
 </head>
 <body>
 
-	<div align="center">
-		<h3>조교 예약 시스템</h3>
-		<a href="<%=request.getContextPath() %>/cal.do">[캘린더]</a>
-		
-	</div>
 </body>
 </html>

@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
-encoding//com/RegDate/Action/CancelOkAction.java=UTF-8
-encoding//com/RegDate/Action/EditOkAction.java=UTF-8
+encoding//src/com/RegDate/Action/Action.java=UTF-8
+encoding//src/com/RegDate/Action/CancelOkAction.java=UTF-8
+encoding//src/com/RegDate/Action/EditOkAction.java=UTF-8
+encoding//src/com/RegDate/Model/UploadDAO.java=UTF-8
