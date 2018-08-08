@@ -25,4 +25,10 @@
     <!--
     <Manager pathname="" />
     -->
+    <Resource name="jdbc/oracle" auth="container" type="javax.sql.DataSource"
+    maxAcitve="10" maxIdle="5" maxWait="10000" username="RSV_System"
+    password="1234" driverClassName="oracle.jdbc.driver.OracleDriver"
+    url="jdbc:oracle:thin:@localhost:1521:xe" closeMethod="close" ></Resource>
+    <ResourceLink name="jdbc/oracle" type="javax.sql.DataSource" global="jdbc/oracle"></ResourceLink>
+    
 </Context>

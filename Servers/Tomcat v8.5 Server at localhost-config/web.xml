@@ -108,6 +108,8 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
+ 
 
 
   <!-- The JSP page compiler and execution servlet, which is the mechanism  -->
@@ -4690,5 +4692,17 @@
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    
+    <servlet>
+    	<servlet-name>FrontController</servlet-name>
+    	<servlet-class>com.RegDate.Controller.FrontController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>FrontController</servlet-name>
+    	<url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    
+    
 
 </web-app>

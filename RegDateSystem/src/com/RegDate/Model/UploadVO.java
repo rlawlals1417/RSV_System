@@ -11,9 +11,11 @@ public class UploadVO {
 	private String upload_comment;
 	private String upload_pwd;
 	
-	//input Calendar
-	private int upload_month;
-	private int upload_day;
+	//Calendar
+	private int ryear;
+	private int rmonth;
+	private int rday;
+	private String rtime;
 	private int upload_start_time;
 	private int upload_end_time;
 	
@@ -46,11 +48,14 @@ public class UploadVO {
 
 	/*-----------------------------------------------------------------------------------------*/
 	
-	public int getUpload_month() {return upload_month;}
-	public void setUpload_month(int upload_month) {this.upload_month = upload_month;}
+	public int getRyear() {return ryear;}
+	public void setRyear(int ryear) {this.ryear = ryear;}
 	
-	public int getUpload_day() {return upload_day;}
-	public void setUpload_day(int upload_day) {this.upload_day = upload_day;}
+	public int getRmonth() {return rmonth;}
+	public void setRmonth(int rmonth) {this.rmonth = rmonth;}
+	
+	public int getRday() {return rday;}
+	public void setRday(int rday) {this.rday = rday;}
 
 	public int getUpload_start_time() {return upload_start_time;}
 	public void setUpload_start_time(int upload_start_time) {this.upload_start_time = upload_start_time;}
@@ -58,7 +63,20 @@ public class UploadVO {
 	public int getUpload_end_time() {return upload_end_time;}
 	public void setUpload_end_time(int upload_end_time) {this.upload_end_time = upload_end_time;}
 	
-	
+	public String getRtime(int s_time, int e_time) {
+		this.upload_start_time = s_time;
+		this.upload_end_time = e_time;
+		rtime = s_time+"~"+e_time;
+		return rtime;
+		}
+	public void setRtime(String rtime) {
+		this.rtime = rtime;
+		
+		
+		
+		
+		
+	}
 	
 	
 	

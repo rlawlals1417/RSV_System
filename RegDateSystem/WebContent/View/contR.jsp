@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-	<title>write</title>
+	<title>cont</title>
 	<style>
 		.text_H			{ width:300px; height:150px; }
 		.submit		{ position:absolute; bottom:1px; left:3px; height:30px; width:306px; }
@@ -17,8 +17,8 @@
 	<script src="jquery-1.11.3.js"></script>
 </head>
 <body>
-	<form method="post" action="<%=request.getContextPath() %>/write.do">
-	<c:set  value="${VO }" var="vo"></c:set>
+	<form method="post" action="<%=request.getContextPath() %>/cont.do">
+	<c:set var="vo" value="${VO }"></c:set>
 	<input type="hidden" name="upload_no" value="${vo.getUpload_no() }" >
 	
 		<table>
@@ -30,18 +30,18 @@
 			<tbody>
 				<tr>
 					<th>학생이름</th>
-					<td colspan="2"><input name="upload_name" type="text" value=""/></td>
+					<td colspan="2"><input type="text" value=""/></td>
 				</tr>
 				<tr>
 					<th>수강과목</th>
-					<td colspan="2"><input name="upload_class" type="text" value=""/></td>
+					<td colspan="2"><input type="text" value=""/></td>
 				</tr>
 				<tr>
 					<th rowspan="2">보충시간</th>
 				</tr>
 				<tr>
 					<td>
-					<select name="upload_start_time">
+					<select name="Start_Time">
 						<option value="">Start</option>			<!-- value : pass to server -->
 						<option value="11">11:00</option>
 						<option value="12">12:00</option>
@@ -55,7 +55,7 @@
 						</select>
 					</td>
 					<td>
-					<select name="upload_end_time">
+					<select name="End_Time">
 						<option value="">End</option>
 						<option value="12">12:00</option>
 						<option value="13">13:00</option>
@@ -73,20 +73,16 @@
 					<th colspan="3">내용</th>
 				</tr>
 				<tr>
-					<td colspan="3"><textarea name="upload_comment" class="text_H"></textarea></td>
+					<td colspan="3"><textarea class="text_H"></textarea></td>
 				</tr>
 				
 				<tr>
 					<th>비밀번호</th>
-					<td colspan="2"><input name="upload_pwd" type="password" value=""/></td>
-					
+					<td colspan="2"><input type="text" value=""/></td>
 				</tr>
 				
 				<tr>
-					<td colspan="3" align="center">
-						<input type="submit" value="예약추가" class="submit">&nbsp;&nbsp;&nbsp;
-						<input type="reset" value="다시작성" >
-					</td>
+					<td colspan="3"><input type="submit" value="예약추가" class="submit"/></td>
 				</tr>
 			</tbody>
 		</table>

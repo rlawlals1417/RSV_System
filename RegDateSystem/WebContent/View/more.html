@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+	<title>cont</title>
+	<style>
+		.text_H			{ width:300px; height:150px; }
+		.check		{ position:absolute; bottom:1px; left:3px; height:30px; width:306px; }
+		table			{ width:300px; height:400px; position:relative; border:1px solid gray; }
+		th				{ text-align:left; width:100%;  padding:10px 10px; height:20px; line-height:20px; border-bottom:1px solid #eee;  border-right:1px solid #eee; }
+		td				{ text-align:center; width:100%; height:20px; line-height:20px; border-bottom:1px solid #eee; border-right:1px solid #eee; }
+		select			{ text-align-last:center; background: #eee; color:#000; }
+	</style>
+	<script src="jquery-1.11.3.js"></script>
+</head>
+<body>
+	<form method="post">
+		<table>
+			<thead>
+				<tr>
+					<th colspan="4">~월~일 예약</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>학생이름</th>
+					<td colspan="2">${i.getUpload_name() }</td>
+				</tr>
+				<tr>
+					<th>수강과목</th>
+					<td colspan="2">${i.getUpload_class() }</td>
+				</tr>
+				<tr>
+					<th rowspan="2">보충시간</th>
+				</tr>
+				<tr>
+					<td>${i.getUpload_start_time() }</td>
+					<td>${i.getUpload_end_time() }</td>
+				</tr>
+				<tr>
+					<th colspan="3">내용</th>
+				</tr>
+				<tr>
+					<td colspan="3"><textarea class="text_H">${i.getUpload_content }</textarea></td>
+				</tr>
+				<tr>
+					<td colspan="3"><input type="submit" value="확인" class="check"/></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+<script type="text/javascript">
+	$('.check').on('click',function(){
+		window.close();
+	})
+</script>
+</body>
+</html> 

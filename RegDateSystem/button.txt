@@ -1,0 +1,21 @@
+out.println("		
+<td colspan="+row+" align=center>
+<a href='"+traverseDate("downYear", year, month)+"'><font style='text-decoration: none;'>¡å</font></a>
+
+<font style='font-size: 18'>"+year+"</font>³â
+<a href='"+traverseDate("upYear", year, month)+"'><font style='text-decoration:none;'>¡ã</font></a>
+
+&nbsp;
+
+<a href='"+traverseDate("downMonth", year, month)+"'><font style='text-decoration: none;'>¡å</font></a>
+
+<font style='font-size: 18'>"+(month+1)+"</font>¿ù
+<a href='"+traverseDate("upMonth", year, month)+"'><font style='text-decoration:none;'>¡ã</font></a>
+
+&nbsp;&nbsp;
+
+<a href='./JSPCalendar.jsp'><font style='text-decoration: none;'>reset</font></a>
+
+</td>
+
+");

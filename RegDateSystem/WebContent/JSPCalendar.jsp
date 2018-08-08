@@ -1,75 +1,105 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
-<%@ page import="java.util.*" %>
-<style type="text/css">
-	.inp{
-		border:1 solid #E2EAFF;
-		font-family:"±¼¸²Ã¼";
-		font-size:10pt;
-	}
-	a, a:link, a:visited, a:active{
-		text-decoration: none;
-		color: #122293;
-	}
-	a:hover{
-		text-decoration: none;
-		font-size: 10pt
-	}
-</style>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<style type="text/css">
+.inp {
+	border: 1 solid #E2EAFF;
+	font-family: "êµ´ë¦¼ì²´";
+	font-size: 10pt;
+}
+
+a, a:link, a:visited, a:active {
+	text-decoration: none;
+	color: #122293;
+}
+
+a:hover {
+	text-decoration: none;
+	font-size: 10pt
+}
+
+</style>
+<c:set var="vo" value="${VO }"></c:set>
+	 
 <%
-	//º¸¿©ÁÙ ¿¬µµ, ´Ş ¹Ş¾Æ¿À±â. ÆÄ¶ó¹ÌÅÍ °ªÀÌ ¼ıÀÚ°¡ ¾Æ´Ï°Å³ª nullÀÌ¸é ÇöÀç ´Ş·Î º¸¿©ÁÜ.
+	//ë³´ì—¬ì¤„ ì—°ë„, ë‹¬ ë°›ì•„ì˜¤ê¸°. íŒŒë¼ë¯¸í„° ê°’ì´ ìˆ«ìê°€ ì•„ë‹ˆê±°ë‚˜ nullì´ë©´ í˜„ì¬ ë‹¬ë¡œ ë³´ì—¬ì¤Œ.
 	GregorianCalendar curDate = new GregorianCalendar();
 	int year = 0;
-	int month = 0; //¿øÇÏ´Â ´Ş-1 °ª. ¿¹)2¿ù = 1
+	int month = 0; //ì›í•˜ëŠ” ë‹¬-1 ê°’. ì˜ˆ)2ì›” = 1
 	try{
-		year = Integer.parseInt(request.getParameter("year"));
-		month = Integer.parseInt(request.getParameter("month"));
-		curDate.set(Calendar.YEAR, year); //º¸¿©ÁÙ ¿¬µµ setting
-		curDate.set(Calendar.MONTH, month); //º¸¿©ÁÙ ´Ş setting
-		curDate.set(Calendar.DAY_OF_MONTH, 1); //ÀÏÀÚ´Â 1ÀÏ·Î °íÁ¤
+		year = Integer.parseInt(request.getParameter("vo.getYear()"));
+		month = Integer.parseInt(request.getParameter("${vo.getMonth()"));
+		curDate.set(Calendar.YEAR, year); 				//ë³´ì—¬ì¤„ ì—°ë„	(setting year to show)
+		curDate.set(Calendar.MONTH, month); 			//ë³´ì—¬ì¤„ ë‹¬	(setting month to show)
+		curDate.set(Calendar.DAY_OF_MONTH, 1); 			//1ì¼ë¡œ ê³ ì •	(static 1 day)
 	}catch(NumberFormatException nfe){
 		year = curDate.get(Calendar.YEAR);
 		month = curDate.get(Calendar.MONTH);
 	}
-	int firstDay = new GregorianCalendar(curDate.get(Calendar.YEAR), curDate.get(Calendar.MONTH), 1).get(Calendar.DAY_OF_WEEK); //ÇØ´ç ´ŞÀÇ ½ÃÀÛÇÏ´Â ³¯ idx
-	int lastDay = curDate.getActualMaximum(Calendar.DAY_OF_MONTH); //ÇØ´ç ´ŞÀÇ ¸¶Áö¸· ³¯
-	
-	//¿À´Ã ÀÏÀÚ ±¸ÇÏ±â
+	int firstDay = new GregorianCalendar(curDate.get(Calendar.YEAR), curDate.get(Calendar.MONTH), 1).get(Calendar.DAY_OF_WEEK); //í•´ë‹¹ ë‹¬ì˜ ì‹œì‘í•˜ëŠ” ë‚  idx
+	int lastDay = curDate.getActualMaximum(Calendar.DAY_OF_MONTH); //í•´ë‹¹ ë‹¬ì˜ ë§ˆì§€ë§‰ ë‚ (last day of month)
+
+	//ì˜¤ëŠ˜ ì¼ì êµ¬í•˜ê¸°	(Get today)
 	GregorianCalendar getToday = new GregorianCalendar();
 	int todayYear = getToday.get(Calendar.YEAR);
 	int todayMonth = getToday.get(Calendar.MONTH);
 	int todayDate = getToday.get(Calendar.DAY_OF_MONTH)+1;
 	
-	//´Ş·Â ±¸Çö
-	int row = 7; //Çà
-	int col = 5; //¿­
+	//ë‹¬ë ¥ êµ¬í˜„		(Let's make Calendar!!)
+	int row = 7; //í–‰
+	int col = 5; //ì—´
 	int day = 1;
 	out.println("<table class=inp border=1>");
 	out.println("	<tr>");
-	out.println("		<td colspan="+row+" align=center><a href='"+traverseDate("downYear", year, month)+"'><font style='text-decoration: none;'>¡å</font></a><font style='font-size: 18'>"+year+"</font>³â<a href='"+traverseDate("upYear", year, month)+"'><font style='text-decoration: none;'>¡ã</font></a>&nbsp;<a href='"+traverseDate("downMonth", year, month)+"'><font style='text-decoration: none;'>¡å</font></a><font style='font-size: 18'>"+(month+1)+"</font>¿ù<a href='"+traverseDate("upMonth", year, month)+"'><font style='text-decoration: none;'>¡ã</font></a>&nbsp;&nbsp;<a href='./JSPCalendar.jsp'><font style='text-decoration: none;'>reset</font></a></td>");
+	out.println("		<td colspan="+row+" align=center><a href='"+traverseDate("downYear", year, month)+"'><font style='text-decoration: none;'>â–¼</font></a><font style='font-size: 18'>"+year+"</font>ë…„<a href='"+traverseDate("upYear", year, month)+"'><font style='text-decoration: none;'>â–²</font></a>&nbsp;<a href='"+traverseDate("downMonth", year, month)+"'><font style='text-decoration: none;'>â–¼</font></a><font style='font-size: 18'>"+(month+1)+"</font>ì›”<a href='"+traverseDate("upMonth", year, month)+"'><font style='text-decoration: none;'>â–²</font></a>&nbsp;&nbsp;<a href='./JSPCalendar.jsp'><font style='text-decoration: none;'>reset</font></a></td>");
 	out.println("	</tr>");
 	out.println("	<tr align=left height=30>");
-	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><font color='red'><b>ÀÏ</b></font></td>"); 
-	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>¿ù</b></td>");
-	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>È­</b></td>");
-	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>¼ö</b></td>");
-	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>¸ñ</b></td>");
-	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>±İ</b></td>");
-	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><font color='blue'><b>Åä</b></font></td>");
+	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><font color='red'><b>ì¼</b></font></td>"); 
+	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>ì›”</b></td>");
+	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>í™”</b></td>");
+	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>ìˆ˜</b></td>");
+	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>ëª©</b></td>");
+	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><b>ê¸ˆ</b></td>");
+	out.println("		<td class=inp bgcolor='#E5E7ED' valign=top><font color='blue'><b>í† </b></font></td>");
 	out.println("	</tr>");
 	for(int i = 0; i < col; i++){
 		out.println("<tr align=left height=75>");
 		for(int j = 0; j < row; j++){
 			out.println("<td class=inp width=100 bgcolor='#FCFDFE' valign=top>");
 			if(day <= lastDay){
-				//Ã¹ ÁÖ ½ÃÀÛÇÏ´Â ³¯ Àü±îÁö´Â ºóÄ­À¸·Î Ã¤¿ì±â
+				//ì²« ì£¼ ì‹œì‘í•˜ëŠ” ë‚  ì „ê¹Œì§€ëŠ” ë¹ˆì¹¸ìœ¼ë¡œ ì±„ìš°ê¸° (Fill in the 'blank' until the first week begins.)
 				if(i == 0 && (j+1) < firstDay){
 					out.println("&nbsp;");
 					continue;
 				}
-				if(j == 0)	out.println("<font color='red' style='text-decoration: none;'><b>" + day++ + "</b></font>" + printToday(todayYear, year, todayMonth, month, todayDate, day));
-				else if(j == 6)	out.println("<font color='blue' style='text-decoration: none;'><b>" + day++ + "</b></font>" + printToday(todayYear, year, todayMonth, month, todayDate, day));
-				else	out.println("<font color='black' style='text-decoration: none;'><b>" + day++ + "</b></font>" + printToday(todayYear, year, todayMonth, month, todayDate, day));
+				
+				//ì¼ìš”ì¼	(Sunday)
+				if(j == 0)
+				out.println("<font color='red' style='text-decoration: none;'><b>"
+				+ day++ + "</b></font>" + printToday(todayYear, year, todayMonth, month, todayDate, day));
+				
+				
+				//í† ìš”ì¼	(Saturday)
+				else if(j == 6)
+				out.println("<font color='blue' style='text-decoration: none;'><b>"
+				+ day++ + "</b></font>" + printToday(todayYear, year, todayMonth, month, todayDate, day));
+				
+				
+				//í‰ì¼	(weekday)
+				else{
+					
+				out.println("<font color='black' style='text-decoration: none;'><b>"
+				+ day++ + "</b></font>" + printToday(todayYear, year, todayMonth, month, todayDate, day));
+			/* 	
+				out.println("<input type = 'text' size ='10' id='today'/>");
+				out.println("<input type='button' value='ê²€ìƒ‰' onclick='javascript:search()''/>");
+		 */		out.println("<a href ='"+RSV("ìƒì„¸ë³´ê¸°", year, month, day)+"'><font style='text-decoration: none;'>ìƒì„¸ë³´ê¸°</font></a>");
+				}
+				
 			}else{
 				out.println("&nbsp;");
 			}
@@ -77,7 +107,7 @@
 		}
 		out.println("</tr>");
 
-		//ÇØ´ç ´ŞÀÇ 1ÀÏÀÌ ±İ¿äÀÏÀÌ³ª Åä¿äÀÏ·Î ½ÃÀÛÇØ¼­ 5ÁÙ·Î Ãâ·ÂÀÌ ºÒ°¡´ÉÇÑ °æ¿ì ÇÑ ÁÙ Ãß°¡
+		//í•´ë‹¹ ë‹¬ì˜ 1ì¼ì´ ê¸ˆìš”ì¼ì´ë‚˜ í† ìš”ì¼ë¡œ ì‹œì‘í•´ì„œ 5ì¤„ë¡œ ì¶œë ¥ì´ ë¶ˆê°€ëŠ¥í•œ ê²½ìš° í•œ ì¤„ ì¶”ê°€
 		if(((i+1) == col) && (lastDay > (day-1))){
 			col++;
 		}
@@ -85,35 +115,42 @@
 	out.println("</table>");
 %>
 
-<%!
-	//¿¬µµ, ´Ş ÀÌµ¿ ÇïÆÛ ¸Ş¼Òµå
-	private String traverseDate(String type, int year, int month){
+<%!//ì—°ë„, ë‹¬ ì´ë™ í—¬í¼ ë©”ì†Œë“œ
+	private String traverseDate(String type, int year, int month) {
 		String href = "";
-		if(type.equals("upYear")){
-			href = "./JSPCalendar.jsp?year=" + (year+1) + "&month=" + month;
-		}else if(type.equals("downYear")){
-			href = "./JSPCalendar.jsp?year=" + (year-1) + "&month=" + month;
-		}else if(type.equals("upMonth")){
-			if(month == 11){
-				href = "./JSPCalendar.jsp?year=" + (year+1) + "&month=0";
-			}else{
-				href = "./JSPCalendar.jsp?year=" + year + "&month=" + (month+1);
+		if (type.equals("upYear")) {
+			href = "./JSPCalendar.jsp?year=" + (year + 1) + "&month=" + month;
+		} else if (type.equals("downYear")) {
+			href = "./JSPCalendar.jsp?year=" + (year - 1) + "&month=" + month;
+		} else if (type.equals("upMonth")) {
+			if (month == 11) {
+				href = "./JSPCalendar.jsp?year=" + (year + 1) + "&month=0";
+			} else {
+				href = "./JSPCalendar.jsp?year=" + year + "&month=" + (month + 1);
 			}
-		}else if(type.equals("downMonth")){
-			if(month == 0){
-				href = "./JSPCalendar.jsp?year=" + (year-1) + "&month=11";
-			}else{
-				href = "./JSPCalendar.jsp?year=" + year + "&month=" + (month-1);
+		} else if (type.equals("downMonth")) {
+			if (month == 0) {
+				href = "./JSPCalendar.jsp?year=" + (year - 1) + "&month=11";
+			} else {
+				href = "./JSPCalendar.jsp?year=" + year + "&month=" + (month - 1);
 			}
 		}
 		return href;
 	}
 	
-	//¿À´Ã ÀÏÀÚ Âï±â ÇïÆÛ ¸Ş¼Òµå
-	private String printToday(int todayYear, int year, int todayMonth, int month, int todayDate, int day){
-		if(todayYear == year && todayMonth == month && todayDate == day){
+	private String RSV(String type, int year, int month, int day){
+		String href ="";
+		if(type.equals("ìƒì„¸ë³´ê¸°")){
+			href="listCont.do";
+		}
+		return href;
+	}
+
+	//ì˜¤ëŠ˜ ì¼ì ì°ê¸° í—¬í¼ ë©”ì†Œë“œ
+	private String printToday(int todayYear, int year, int todayMonth, int month, int todayDate, int day) {
+		if (todayYear == year && todayMonth == month && todayDate == day) {
 			return "&nbsp;<b>Today</b>";
 		}
 		return "";
-	}
-%>
+	}%>
+</html>
