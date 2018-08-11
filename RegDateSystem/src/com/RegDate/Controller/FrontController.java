@@ -13,8 +13,7 @@ import com.RegDate.Action.ListAction;
 import com.RegDate.Action.ListContAction;
 import com.RegDate.Action.CancelAction;
 import com.RegDate.Action.EditAction;
-import com.RegDate.Action.ContAction;
-import com.RegDate.Action.WriteAction;
+import com.RegDate.Action.WriteOkAction;
 import com.RegDate.Action.CalReservation;
 
 public class FrontController extends HttpServlet {
@@ -52,14 +51,9 @@ public class FrontController extends HttpServlet {
 		}else if(command.equals("listCont.do")) {
 			action = new ListContAction();
 			action.execute(request, response);
-			viewPage = "/View/list.jsp";
+			viewPage = "/View/listCont.jsp";
 		}
-		else if (command.equals("cont.do")) {
-			action = new ContAction();
-			action.execute(request, response);
-			viewPage = "/View/cont.jsp";
-		}
-
+	
 		else if (command.equals("cal.do")) {
 			action = new CalReservation();
 			action.execute(request, response);
@@ -76,10 +70,13 @@ public class FrontController extends HttpServlet {
 			viewPage = "/View/cancel.jsp";
 
 		} else if (command.equals("write.do")) {
-			action = new WriteAction();
-			action.execute(request, response);
 			viewPage = "/View/write.jsp";
-		}
+			
+		}else if (command.equals("writeOK.do")) {
+			action = new WriteOkAction();
+			action.execute(request, response);
+			viewPage = "/listCont.do";
+			}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);

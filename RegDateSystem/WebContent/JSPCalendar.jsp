@@ -1,3 +1,4 @@
+<%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
@@ -31,8 +32,8 @@ a:hover {
 	int year = 0;
 	int month = 0; //원하는 달-1 값. 예)2월 = 1
 	try{
-		year = Integer.parseInt(request.getParameter("vo.getYear()"));
-		month = Integer.parseInt(request.getParameter("${vo.getMonth()"));
+		year = Integer.parseInt(request.getParameter("year"));
+		month = Integer.parseInt(request.getParameter("month"));
 		curDate.set(Calendar.YEAR, year); 				//보여줄 연도	(setting year to show)
 		curDate.set(Calendar.MONTH, month); 			//보여줄 달	(setting month to show)
 		curDate.set(Calendar.DAY_OF_MONTH, 1); 			//1일로 고정	(static 1 day)
@@ -88,16 +89,18 @@ a:hover {
 				out.println("<font color='blue' style='text-decoration: none;'><b>"
 				+ day++ + "</b></font>" + printToday(todayYear, year, todayMonth, month, todayDate, day));
 				
+				/* 	
+				out.println("<input type = 'text' size ='10' id='today'/>");
+				out.println("<input type='button' value='검색' onclick='javascript:search()''/>");
+		 		*/	
 				
-				//평일	(weekday)
+		 		//평일	(weekday)
 				else{
 					
 				out.println("<font color='black' style='text-decoration: none;'><b>"
 				+ day++ + "</b></font>" + printToday(todayYear, year, todayMonth, month, todayDate, day));
-			/* 	
-				out.println("<input type = 'text' size ='10' id='today'/>");
-				out.println("<input type='button' value='검색' onclick='javascript:search()''/>");
-		 */		out.println("<a href ='"+RSV("상세보기", year, month, day)+"'><font style='text-decoration: none;'>상세보기</font></a>");
+				out.println("<a href ='"+RSV("상세보기", year, month, day)+"'><font style='text-decoration: none;'>상세보기</font></a>");
+				out.println((month+1)+"월"+(day-1)+"일");
 				}
 				
 			}else{
@@ -118,14 +121,14 @@ a:hover {
 <%!//연도, 달 이동 헬퍼 메소드
 	private String traverseDate(String type, int year, int month) {
 		String href = "";
-		if (type.equals("upYear")) {
+		if(type.equals("upYear")) {
 			href = "./JSPCalendar.jsp?year=" + (year + 1) + "&month=" + month;
-		} else if (type.equals("downYear")) {
+		}else if(type.equals("downYear")) {
 			href = "./JSPCalendar.jsp?year=" + (year - 1) + "&month=" + month;
-		} else if (type.equals("upMonth")) {
+		}else if(type.equals("upMonth")) {
 			if (month == 11) {
 				href = "./JSPCalendar.jsp?year=" + (year + 1) + "&month=0";
-			} else {
+			}else{
 				href = "./JSPCalendar.jsp?year=" + year + "&month=" + (month + 1);
 			}
 		} else if (type.equals("downMonth")) {
@@ -140,8 +143,11 @@ a:hover {
 	
 	private String RSV(String type, int year, int month, int day){
 		String href ="";
+		
 		if(type.equals("상세보기")){
-			href="listCont.do";
+			href="listCont.do?year="+year+"&month="+(month+1)+"&day="+(day-1);
+			
+			
 		}
 		return href;
 	}

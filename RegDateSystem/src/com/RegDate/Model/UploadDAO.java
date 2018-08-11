@@ -16,7 +16,7 @@ public class UploadDAO {
 	String sql = null;
 
 	public UploadDAO() {
-		/*-----------------JNDI설정-----------------*/
+	/*-----------------JNDI설정-----------------*/
 		try {
 			Context init = new InitialContext();
 			DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/oracle");
@@ -28,58 +28,76 @@ public class UploadDAO {
 
 	/*------------------예약 하기------------------*/
 
-	public int write(UploadVO vo) {
-		int result = 0;
-		int no = 0;
+	public void write(UploadVO vo) {
+	//	int result = 0;
+		int uniqueNo = 0;
 
 		try {
-
-			pstmt = conn.prepareStatement(sql);
+			
+			String nosql = "select max(uniqueNo) from RSV_System";
+			pstmt = conn.prepareStatement(nosql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				no = rs.getInt(1) + 1;
+				uniqueNo = rs.getInt(1) + 1;
 
 			} else {
-				no = 1;
+				uniqueNo = 1;		//첫번째 게시물 인 경우
 			}
-			sql = "insert into RSV_System values(?,?,?,?,?,?,?,?)";
+			sql = "insert into RSV_System ("
+					+ "upload_no, upload_name, upload_class, upload_tel, upload_start_time, upload_end_time, upload_comment, upload_writer, upload_pwd, uniqueNo) "
+					+ "values(upload_no_seq.nextval,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
-			pstmt.setString(2, vo.getUpload_regdate());
-			pstmt.setString(3, vo.getUpload_name());
-			pstmt.setString(4, vo.getUpload_class());
-			pstmt.setString(5, vo.getUpload_tel());
+			pstmt.setInt(9, uniqueNo);
+			pstmt.setString(1, vo.getUpload_name());
+			pstmt.setString(2, vo.getUpload_class());
+			pstmt.setString(3, vo.getUpload_tel());
+			pstmt.setString(4, vo.getUpload_start_time());
+			pstmt.setString(5, vo.getUpload_end_time());
 			pstmt.setString(6, vo.getUpload_writer());
 			pstmt.setString(7, vo.getUpload_comment());
-			pstmt.setInt(8, 0);
-			result = pstmt.executeUpdate();
+			pstmt.setString(8, vo.getUpload_pwd());
+		//	result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 			rs.close();
 			pstmt.close();
 			conn.close();
 
 		} catch (SQLException e) {
+			System.out.println("write SQL문실행 오류입니다.");
 			e.printStackTrace();
 		}
 
-		return result;
+//		return result;
+		
 	}
+	
 
 	/*------------------예약 정보------------------*/
+/*	public int calInfo(UploadVO vo) {
+		try {
+			
+			String sql = "select upload_name, upload_start_time, upload_end_time from RSV_System";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				vo.set
+			}
+		}
+	}*/
 
 	public List<UploadVO> selectList() {
 		List<UploadVO> list = new ArrayList<UploadVO>();
 
 		try {
 
-			sql = "select upload_no, upload_name, upload_regdate, upload_class, upload_comment from RSV_System";
+			sql = "select upload_no, upload_name, upload_class, upload_comment from RSV_System";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				UploadVO vo = new UploadVO();
 				vo.setUpload_no(rs.getInt("upload_no"));
 				vo.setUpload_name(rs.getString("upload_name"));
-				vo.setUpload_regdate(rs.getString("upload_regdate"));
 				vo.setUpload_class(rs.getString("upload_class"));
 				vo.setUpload_comment(rs.getString("upload_comment"));
 				list.add(vo);
@@ -102,7 +120,9 @@ public class UploadDAO {
 		List<UploadVO> listCont = new ArrayList<UploadVO>();
 
 		try {
+			//sql = "select upload_name, rtime, upload_class from RSV_System where ryear=? and rmonth =? and rday=?";
 			sql = "select upload_name, rtime, upload_class from RSV_System";
+			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -110,6 +130,10 @@ public class UploadDAO {
 				vo.setUpload_name(rs.getString("upload_name"));
 				vo.setRtime(rs.getString("rtime"));
 				vo.setUpload_class(rs.getString("upload_class"));
+				//vo.setRyear(rs.getInt("ryear"));
+				//vo.setRmonth(rs.getInt("rmonth"));
+				//vo.setRday(rs.getInt("rday"));
+				
 
 				listCont.add(vo);
 
@@ -162,7 +186,6 @@ public class UploadDAO {
 			while (rs.next()) {
 
 				vo.setUpload_no(rs.getInt("upload_no"));
-				vo.setUpload_regdate(rs.getString("upload_regdate"));
 				vo.setUpload_name(rs.getString("upload_name"));
 				vo.setUpload_class(rs.getString("upload_class"));
 				vo.setUpload_tel(rs.getString("upload_tel"));
