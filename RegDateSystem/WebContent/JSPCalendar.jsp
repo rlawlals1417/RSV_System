@@ -100,7 +100,7 @@ a:hover {
 				out.println("<font color='black' style='text-decoration: none;'><b>"
 				+ day++ + "</b></font>" + printToday(todayYear, year, todayMonth, month, todayDate, day));
 				out.println("<a href ='"+RSV("상세보기", year, month, day)+"'><font style='text-decoration: none;'>상세보기</font></a>");
-				out.println((month+1)+"월"+(day-1)+"일");
+				
 				}
 				
 			}else{

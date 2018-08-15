@@ -8,9 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 	<style type="text/css">
+		
 		table			{ border:1px solid #000; width:300px; height:300px; position:relative; }
 		td				{ height:20px; line-height:24px; text-align:center; text-align:center; border-bottom:1px solid #eee; border-right:1px solid #eee;}
-		.W_A				{ width:65px; height:24px; font-size:12px; position:absolute; bottom:2px; right:2px; }
+		.W_A			{ width:65px; height:24px; font-size:12px; position:absolute; bottom:2px; right:2px; }
 		.none			{ border:none; }
 	</style>
 <!-- 	<link href="base.css" type="text/css" rel="stylesheet" /> -->
@@ -20,22 +21,20 @@
 
 	<form method="post" action="<%=request.getContextPath() %>/listCont.do">
 	
-	
-	  	
 		<table class="listCont">
-		
 			<thead>
-		
 				<tr>
-	 			<th colspan="5">${i.getRyear() }년 ${i.getRmonth() }월 ${i.getRday() }일 예약</th>
-				</tr>
-		
+	 			<th colspan="5">${param.year }년 ${param.month }월  ${param.day }일 예약 </th>
+	 			</tr>
+
 			</thead>
+			
 	
 			<tr>
 				<th>이름</th>
 				<th>시간</th>
 				<th>과목</th>
+	 		
 			</tr>
 			
 			<c:forEach items="${Upload }" var="i">
@@ -44,6 +43,7 @@
 			
 	
 			 <tr class="mo_on">
+			
 				<td class="name"><a href="<%=request.getContextPath() %>/more.do?no=${i.getUpload_no() }">${i.getUpload_name() }</a></td>
 				<td class="time">${i.getUpload_start_time() } ~ ${i.getUpload_end_time() }</td>
 					

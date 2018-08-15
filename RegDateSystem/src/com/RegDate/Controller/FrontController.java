@@ -75,7 +75,7 @@ public class FrontController extends HttpServlet {
 		}else if (command.equals("writeOK.do")) {
 			action = new WriteOkAction();
 			action.execute(request, response);
-			viewPage = "/listCont.do";
+			viewPage = "/cal.do";
 			}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
