@@ -20,13 +20,16 @@
 
 	<form method="post" action="<%=request.getContextPath() %>/listCont.do">
 	
-		
+	
+	  	
 		<table class="listCont">
 		
 			<thead>
+		
 				<tr>
-					<th colspan="5">${i.getRyear() }년 ${i.getRmonth() }월 ${i.getRyear() }일 예약</th>
+	 			<th colspan="5">${i.getRyear() }년 ${i.getRmonth() }월 ${i.getRday() }일 예약</th>
 				</tr>
+		
 			</thead>
 	
 			<tr>
@@ -37,17 +40,21 @@
 			
 			<c:forEach items="${Upload }" var="i">
 	
-	    	
+	    	<input type="hidden" name="upload_no" value="${i.getUpload_no() }">
+			
 	
 			 <tr class="mo_on">
-				<td class="name">${i.getUpload_name() }</td>
+				<td class="name"><a href="<%=request.getContextPath() %>/more.do?no=${i.getUpload_no() }">${i.getUpload_name() }</a></td>
 				<td class="time">${i.getUpload_start_time() } ~ ${i.getUpload_end_time() }</td>
 					
 				<td>${i.getUpload_class() }</td>
+		
+				
+					
 			</tr>
-	
+	 		
 			<tr>
-				<td class="none"><input type="button" class="W_A"value="예약추가" onclick="location.href='write.do'"/></td>
+				<td class="none"><input type="button" class="W_A"value="예약추가" onclick="location.href='<%=request.getContextPath() %>/write.do'"/></td>
 			</tr>
 			</c:forEach>
 		</table>

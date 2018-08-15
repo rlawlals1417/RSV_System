@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.RegDate.Action.Action;
-import com.RegDate.Action.ListAction;
 import com.RegDate.Action.ListContAction;
+import com.RegDate.Action.MoreAction;
 import com.RegDate.Action.CancelAction;
 import com.RegDate.Action.EditAction;
 import com.RegDate.Action.WriteOkAction;
@@ -43,15 +43,15 @@ public class FrontController extends HttpServlet {
 		Action action = null;
 		String viewPage = null;
 
-		if (command.equals("list.do")) {
-			action = new ListAction();
-			action.execute(request, response);
-			viewPage = "/View/list.html";
-
-		}else if(command.equals("listCont.do")) {
+		if(command.equals("listCont.do")) {
 			action = new ListContAction();
 			action.execute(request, response);
 			viewPage = "/View/listCont.jsp";
+			
+		}else if(command.equals("more.do")) {
+			action = new MoreAction();
+			action.execute(request, response);
+			viewPage = "/View/more.jsp";
 		}
 	
 		else if (command.equals("cal.do")) {

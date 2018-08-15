@@ -11,6 +11,10 @@ public class WriteOkAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// upload_write.jsp 페이지에서 넘어온 데이터를 DB에 저장하는 컨트롤러
+		int ryear = Integer.parseInt(request.getParameter("year"));
+		int rmonth = Integer.parseInt(request.getParameter("month"));
+		int rday = Integer.parseInt(request.getParameter("day"));
+		System.out.println(ryear+"년 "+rmonth+"월 "+rday+"일");
 				UploadVO vo = new UploadVO();
 				vo.setUpload_name(request.getParameter("upload_name"));
 				vo.setUpload_class(request.getParameter("upload_class"));
@@ -23,7 +27,7 @@ public class WriteOkAction implements Action{
 				
 				UploadDAO dao = new UploadDAO();
 			
-				dao.write(vo);
+				dao.write(vo, ryear, rmonth, rday);
 			//	int res = dao.write(vo);
 			/*	PrintWriter out = response.getWriter();
 				if(vo.getUpload_pwd()!=null||vo.getUpload_start_time()!=null||vo.getUpload_end_time()!=null) {  // 값이없는경우

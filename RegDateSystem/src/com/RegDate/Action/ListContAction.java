@@ -15,11 +15,16 @@ public class ListContAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
+		int ryear = Integer.parseInt(request.getParameter("year"));
+		int rmonth = Integer.parseInt(request.getParameter("month"));
+		int rday = Integer.parseInt(request.getParameter("day"));
+		System.out.println(ryear+"³â "+rmonth+"¿ù "+rday+"ÀÏ");
 		
 		UploadDAO dao = new UploadDAO();
-		List<UploadVO> listCont = dao.selectListCont();
+		List<UploadVO> listCont = dao.selectListCont(ryear, rmonth, rday);
 		
 		request.setAttribute("Upload", listCont);
+		request.setAttribute("VO", listCont);
 		
 		
 		

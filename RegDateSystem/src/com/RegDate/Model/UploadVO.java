@@ -3,6 +3,7 @@ package com.RegDate.Model;
 public class UploadVO {
 	
 	private int upload_no;
+	private int uniqueNo;
 	private String upload_name;
 	private String upload_class;
 	private String upload_tel;
@@ -22,6 +23,9 @@ public class UploadVO {
 	
 	public int getUpload_no() {return upload_no;}
 	public void setUpload_no(int upload_no) {this.upload_no = upload_no;}
+	
+	public int getUniqueNo() {return uniqueNo;}
+	public void setUniqueN0(int uniqueNo) {this.uniqueNo = uniqueNo;}
 	
 	public String getUpload_name() {return upload_name;}
 	public void setUpload_name(String upload_name) {this.upload_name = upload_name;}
