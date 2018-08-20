@@ -12,6 +12,7 @@ import com.RegDate.Action.Action;
 import com.RegDate.Action.ListContAction;
 import com.RegDate.Action.MoreAction;
 import com.RegDate.Action.CancelAction;
+import com.RegDate.Action.CancelOkAction;
 import com.RegDate.Action.EditAction;
 import com.RegDate.Action.WriteOkAction;
 import com.RegDate.Action.CalReservation;
@@ -68,6 +69,11 @@ public class FrontController extends HttpServlet {
 			action = new CancelAction();
 			action.execute(request, response);
 			viewPage = "/View/cancel.jsp";
+		
+		} else if (command.equals("cancelOk.do")) {
+			action = new CancelOkAction();
+			action.execute(request, response);
+			viewPage = "/cal.do";
 
 		} else if (command.equals("write.do")) {
 			viewPage = "/View/write.jsp";
@@ -75,7 +81,6 @@ public class FrontController extends HttpServlet {
 		}else if (command.equals("writeOK.do")) {
 			action = new WriteOkAction();
 			action.execute(request, response);
-			viewPage = "/cal.do";
 			}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);

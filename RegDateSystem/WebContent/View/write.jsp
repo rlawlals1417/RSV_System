@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,13 +25,16 @@
 	</script>
 </head>
 <body>
-	<form method="post" action="<%=request.getContextPath() %>/writeOK.do">
-	
-		<table>
+
+	<form method="post" action="<%=request.getContextPath()%>/writeOK.do">
+	<!--  <input type="hidden" name=""> -->
+	 
+	 <table>
 			<thead>
 				<tr>
-					<th colspan="5">${vo.getRmonth() }월 ${vo.getRday() }일 예약</th>
+					<th colspan="5">${param.year }년 ${param.month }월 ${param.day }일 예약</th>
 				</tr>
+		
 			</thead>
 			<tbody>
 				<tr>
@@ -53,28 +57,45 @@
 					<select name="upload_start_time">
 						<option value="">Start</option>			<!-- value : pass to server -->
 						<option value="11:00">11:00</option>
+						<option value="11:30">11:30</option>
 						<option value="12:00">12:00</option>
+						<option value="12:30">12:30</option>
 						<option value="13:00">13:00</option>
+						<option value="13:30">13:30</option>
 						<option value="14:00">14:00</option>
+						<option value="14:30">14:30</option>
 						<option value="15:00">15:00</option>
+						<option value="15:30">15:30</option>
 						<option value="16:00">16:00</option>
+						<option value="16:30">16:30</option>
 						<option value="17:00">17:00</option>
+						<option value="17:30">17:30</option>
 						<option value="18:00">18:00</option>
+						<option value="18:30">18:30</option>
 						<option value="19:00">19:00</option>
 						</select>
 					</td>
 					<td>
 					<select name="upload_end_time">
 						<option value="">End</option>
-						<option value="12:00">11:00</option>
-						<option value="13:00">12:00</option>
-						<option value="14:00">13:00</option>
-						<option value="15:00">14:00</option>
-						<option value="16:00">15:00</option>
-						<option value="17:00">16:00</option>
-						<option value="18:00">17:00</option>
+						<option value="11:00">11:00</option>
+						<option value="11:30">11:30</option>
+						<option value="12:00">12:00</option>
+						<option value="12:30">12:30</option>
+						<option value="13:00">13:00</option>
+						<option value="13:30">13:30</option>
+						<option value="14:00">14:00</option>
+						<option value="14:30">14:30</option>
+						<option value="15:00">15:00</option>
+						<option value="15:30">15:30</option>
+						<option value="16:00">16:00</option>
+						<option value="16:30">16:30</option>
+						<option value="17:00">17:00</option>
+						<option value="17:30">17:30</option>
+						<option value="18:00">18:00</option>
+						<option value="18:30">17:30</option>
 						<option value="19:00">18:00</option>
-						<option value="20:00">19:00</option>
+						
 						</select>
 					</td>
 				</tr>
@@ -98,7 +119,9 @@
 				<tr>
 					<td colspan="3" align="center">
 						<input type="submit" value="예약추가"> &nbsp;&nbsp;&nbsp;
-						<input type="reset" value="다시작성">
+						<input type="reset" value="다시작성"> &nbsp;&nbsp;&nbsp;
+						<input type="button" value="취소"
+		  				onClick="history.back()">
 					</td>
 				</tr>
 			</tbody>

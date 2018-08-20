@@ -12,6 +12,7 @@
 		table			{ border:1px solid #000; width:300px; height:300px; position:relative; }
 		td				{ height:20px; line-height:24px; text-align:center; text-align:center; border-bottom:1px solid #eee; border-right:1px solid #eee;}
 		.W_A			{ width:65px; height:24px; font-size:12px; position:absolute; bottom:2px; right:2px; }
+		.W_L			{ width:65px; height:24px; font-size:12px; position:absolute; bottom:2px; left:2px; }
 		.none			{ border:none; }
 	</style>
 <!-- 	<link href="base.css" type="text/css" rel="stylesheet" /> -->
@@ -19,14 +20,13 @@
 </head>
 <body>
 
-	<form method="post" action="<%=request.getContextPath() %>/listCont.do">
-	
+	<form 	method="post" action="<%=request.getContextPath() %>/listCont.do">
 		<table class="listCont">
 			<thead>
 				<tr>
 	 			<th colspan="5">${param.year }년 ${param.month }월  ${param.day }일 예약 </th>
+	 			
 	 			</tr>
-
 			</thead>
 			
 	
@@ -49,14 +49,20 @@
 					
 				<td>${i.getUpload_class() }</td>
 		
-				
-					
+			</tr>
+			</c:forEach>
+			
+			<tr>
+					<td class="none"><input type="button" class="W_L"value="전체일정" 
+					onclick="location.href='<%=request.getContextPath() %>/cal.do'"/></td>
 			</tr>
 	 		
 			<tr>
-				<td class="none"><input type="button" class="W_A"value="예약추가" onclick="location.href='<%=request.getContextPath() %>/write.do'"/></td>
+					<td class="none"><input type="button" class="W_A"value="예약추가" 
+					onclick="location.href='<%=request.getContextPath() %>/write.do?year=${param.year }&month=${param.month }&day=${param.day }'"/></td>
 			</tr>
-			</c:forEach>
+	
+			
 		</table>
 	</form>
 	<script type="text/javascript">

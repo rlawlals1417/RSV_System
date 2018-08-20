@@ -5,45 +5,43 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.RegDate.Model.UploadDAO;
-import com.RegDate.Model.UploadVO;
 
+public class CancelOkAction implements Action {
 
-public class CancelOkAction implements Action{
-	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		String upload_pwd = request.getParameter("upload_pwd").trim();
 		
+		// 삭제 폼 페이지에서 히든으로 넘어온 데이터도 처리하자.
 		int upload_no = Integer.parseInt(request.getParameter("upload_no"));
 		String db_pwd = request.getParameter("db_pwd").trim();
-		String db_file = request.getParameter("db_file").trim();
-		
-		String up = "C:\\Users\\LG\\MVC_model\\RegDateSystem\\WebContent\\file";
-	
 		
 		UploadDAO dao = new UploadDAO();
-		
 		PrintWriter out = response.getWriter();
 		
-		if(!upload_pwd.equals(db_pwd)) {
+		if(!upload_pwd.equals(db_pwd)) {  // 비밀번호가 일치하지 않는 경우
 			out.println("<script>");
-			out.println("alert('�옒紐삳맂 �뙣�뒪�썙�뱶�엯�땲�떎.')");
+			out.println("alert('비밀번호가 틀립니다. 확인 요망')");
 			out.println("history.back()");
 			out.println("</script>");
+		}else {  // 비밀번호가 일치하는 경우
+			dao.cancel(upload_no);  // 게시글 삭제하는 메서드 호출
 			
-	
-		}else {
-			dao.cancel(upload_no);
-			
-			
-		
-		out.println("<script>");
-		out.println("alert('寃뚯떆臾� �궘�젣 �꽦怨�')");
-		out.println("location.href='select.do'");
-		out.println("</script>");
-
+			// 첨부파일도 삭제하자.
+			out.println("<script>");
+			out.println("alert('게시물 삭제 성공')");
+			out.println("location.href='cal.do'");
+			out.println("</script>");
 		}
-	}	
+		
+	}
+
 }
+
+
+
+
+

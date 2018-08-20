@@ -15,7 +15,7 @@ public class CancelAction implements Action{
 		int upload_no = Integer.parseInt(request.getParameter("no"));
 		
 		UploadDAO dao = new UploadDAO();
-		UploadVO vo = dao.uploadCont(upload_no);
+		UploadVO vo = dao.more(upload_no); 
 		
 		request.setAttribute("VO", vo);
 		

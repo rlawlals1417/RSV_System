@@ -69,7 +69,8 @@
 		  				<input type="button" value="예약 삭제"
 		  					onclick="location.href='<%=request.getContextPath()%>/cancel.do?no=${vo.getUpload_no() }'">
 		  				<input type="button" value="목록"
-		  					onclick="location.href='<%=request.getContextPath()%>/listCont.do'">
+		  				onClick="history.back()">
+		 
 		  			</td>
 		  		</tr>
 			</tbody>
