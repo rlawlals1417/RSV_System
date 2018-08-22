@@ -33,7 +33,8 @@ public class CancelOkAction implements Action {
 			// 첨부파일도 삭제하자.
 			out.println("<script>");
 			out.println("alert('게시물 삭제 성공')");
-			out.println("location.href='cal.do'");
+			out.println("history.go(-3)");
+			//	out.println("location.href='listCont.do?year="+ryear+"&month="+rmonth+"&day="+rday+"'");
 			out.println("</script>");
 		}
 		

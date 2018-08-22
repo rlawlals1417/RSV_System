@@ -45,11 +45,11 @@
 					<td>${vo.getUpload_start_time() }</td>
 					<td>${vo.getUpload_end_time() }</td>
 				</tr>
-				<tr>
+				<%-- <tr>
 					<th>학생 번호</th>
 					<td colspan="2">${vo.getUpload_tel() }</td>
 				</tr>
-				<tr>
+			 --%>	<tr>
 					<th colspan="3">내용</th>
 				</tr>
 				<tr>

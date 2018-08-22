@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.RegDate.Action.Action;
 import com.RegDate.Action.ListContAction;
 import com.RegDate.Action.MoreAction;
+import com.RegDate.Action.WriteAction;
 import com.RegDate.Action.CancelAction;
 import com.RegDate.Action.CancelOkAction;
 import com.RegDate.Action.EditAction;
@@ -73,14 +74,19 @@ public class FrontController extends HttpServlet {
 		} else if (command.equals("cancelOk.do")) {
 			action = new CancelOkAction();
 			action.execute(request, response);
-			viewPage = "/cal.do";
+			//viewPage = "/cal.do";
 
 		} else if (command.equals("write.do")) {
+			action = new WriteAction();
+			action.execute(request, response);
 			viewPage = "/View/write.jsp";
+		
 			
 		}else if (command.equals("writeOK.do")) {
+			
 			action = new WriteOkAction();
 			action.execute(request, response);
+			
 			}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);

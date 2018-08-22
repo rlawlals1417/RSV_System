@@ -27,15 +27,22 @@
 <body>
 
 	<form method="post" action="<%=request.getContextPath()%>/writeOK.do">
-	<!--  <input type="hidden" name=""> -->
-	 
+				<input type="hidden" name="year" value="${YEAR }">
+				<input type="hidden" name="month" value="${MONTH }">
+				<input type="hidden" name="day" value="${DAY }">
+	
 	 <table>
 			<thead>
-				<tr>
+			<%-- 	<tr>
 					<th colspan="5">${param.year }년 ${param.month }월 ${param.day }일 예약</th>
-				</tr>
+				</tr> --%>
 		
+				
+				<tr>
+					<th colspan="5">${YEAR }년 ${MONTH }월 ${DAY }일 예약</th>
+				</tr>
 			</thead>
+			
 			<tbody>
 				<tr>
 					<th>학생이름</th>

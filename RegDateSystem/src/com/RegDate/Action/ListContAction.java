@@ -23,6 +23,9 @@ public class ListContAction implements Action {
 		UploadDAO dao = new UploadDAO();
 		List<UploadVO> listCont = dao.selectListCont(ryear, rmonth, rday);
 		
+		request.setAttribute("YEAR", ryear);
+		request.setAttribute("MONTH", rmonth);
+		request.setAttribute("DAY", rday);
 		request.setAttribute("Upload", listCont);
 		//request.setAttribute("VO", listCont);
 		

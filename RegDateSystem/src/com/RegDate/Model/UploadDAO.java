@@ -28,8 +28,8 @@ public class UploadDAO {
 
 	/*------------------예약 하기------------------*/
 
-	public void write(UploadVO vo, int ryear, int rmonth, int rday) {
-		// int result = 0;
+	public int write(UploadVO vo, int ryear, int rmonth, int rday) {
+		int result = 0;
 		int uniqueNo = 0;
 
 		try {
@@ -59,9 +59,8 @@ public class UploadDAO {
 			pstmt.setString(9, vo.getUpload_writer());
 			pstmt.setString(10, vo.getUpload_comment());
 			pstmt.setString(11, vo.getUpload_pwd());
-			// result = pstmt.executeUpdate();
-			pstmt.executeUpdate();
-
+			result = pstmt.executeUpdate();
+			
 			rs.close();
 			pstmt.close();
 			conn.close();
@@ -70,7 +69,7 @@ public class UploadDAO {
 			System.out.println("write SQL문실행 오류입니다.");
 			e.printStackTrace();
 		}
-
+			return result;
 	}
 
 	/*------------------예약 정보------------------*/
@@ -83,20 +82,24 @@ public class UploadDAO {
 	 * while(rs.next()) { vo.set } } }
 	 */
 
-	public List<UploadVO> selectList() {
+	public List<UploadVO> selectList(int year, int month, int day) {
 		List<UploadVO> list = new ArrayList<UploadVO>();
 
 		try {
 
-			sql = "select upload_no, upload_name, upload_class, upload_comment from RSV_System";
+			sql = "select upload_name,upload_start_time, upload_end_time, upload_class from RSV_System where ryear=? and rmonth=? and rday=?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, year);
+			pstmt.setInt(2, month);
+			pstmt.setInt(3, day);
+
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				UploadVO vo = new UploadVO();
-				vo.setUpload_no(rs.getInt("upload_no"));
 				vo.setUpload_name(rs.getString("upload_name"));
+				vo.setUpload_start_time(rs.getString("upload_start_time"));
+				vo.setUpload_end_time(rs.getString("upload_end_time"));
 				vo.setUpload_class(rs.getString("upload_class"));
-				vo.setUpload_comment(rs.getString("upload_comment"));
 				list.add(vo);
 
 			}
