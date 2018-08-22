@@ -16,7 +16,7 @@ public class CalReservation implements Action {
 		int ryear = Integer.parseInt(request.getParameter("year"));
 		int rmonth = Integer.parseInt(request.getParameter("month"));
 		int rday = Integer.parseInt(request.getParameter("day"));
-		request.setAttribute()
+	
 		
 		UploadVO vo = new UploadVO();
 		vo.setUpload_name(request.getParameter("upload_name"));

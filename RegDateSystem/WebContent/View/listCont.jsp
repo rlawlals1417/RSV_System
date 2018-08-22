@@ -63,10 +63,10 @@ td {
 </script>
 <body>
 
-	<%-- <form method="post" action="<%=request.getContextPath()%>/listCont.do">
-	 --%>
-	 <form name = 'multiSubmit' method="post">
+	 <form method="post" action="<%=request.getContextPath()%>/listCont.do">
 	
+<!-- 	 <form name = 'multiSubmit' method="post">
+ -->	
 		<!-- <form 	method="post" name=send action='#'> -->
 
 
@@ -116,7 +116,7 @@ td {
 			 --%>
 			 
 			 <td class="none"><input type="button" class="W_A" value="예약추가"
-					onclick='multiSubmit(2)'/></td>
+					onclick="location.href='<%=request.getContextPath() %>/write.do?year=${YEAR }&month=${MONTH }&day=${DAY }'"/></td>
 			
 			 </tr>
 
