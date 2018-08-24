@@ -63,7 +63,7 @@ td {
 </script>
 <body>
 
-	 <form method="post" action="<%=request.getContextPath()%>/listCont.do">
+	 <form method="post" action="<%=request.getContextPath()%>/cal.do">
 	
 <!-- 	 <form name = 'multiSubmit' method="post">
  -->	
@@ -106,8 +106,8 @@ td {
 			</c:forEach>
 
 			<tr>
-				<td class="none"><input type="button" class="W_L" value="전체일정"
-					onclick="location.href='<%=request.getContextPath()%>/cal.do'" /></td>
+				<td class="none"><input type="submit" class="W_L" value="전체일정"
+					onclick="location.href='<%=request.getContextPath()%>/CalendarRR.jsp?year=${YEAR }&month=${MONTH }'" /></td>
 			</tr>
 
 			<tr>

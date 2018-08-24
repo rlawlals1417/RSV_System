@@ -100,6 +100,9 @@ public class UploadDAO {
 				vo.setUpload_start_time(rs.getString("upload_start_time"));
 				vo.setUpload_end_time(rs.getString("upload_end_time"));
 				vo.setUpload_class(rs.getString("upload_class"));
+				vo.setRyear(year);
+				vo.setRmonth(month);
+				vo.setRday(day);
 				list.add(vo);
 
 			}

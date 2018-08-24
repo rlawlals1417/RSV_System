@@ -104,12 +104,24 @@ a:hover {
 
 					//평일	(weekday)
 					else {
-						UploadVO vo = new UploadVO();
-						UploadDAO dao = new UploadDAO();
-						List<UploadVO> list = dao.selectList(year, month, day);
-
+						out.println(year+"년 "+month+"월 "+day+"일");
+			
 						out.println("<table>");
 						out.println("<thead>");
+						%>
+						<%=day %>
+						<c:forEach items="${Upload }" var="i">
+					<%-- 	<c:if test="${i.getRyear() == year and i.getRmonth() == month  and i.getRday() == day }">
+					 --%>	
+					 	<c:if test="${i.getRyear() == year and i.getRmonth() == month  and i.getRday() == day }">
+						<tr>
+						<td class="name">${i.getUpload_name() } </td>
+						<td class="time">${i.getUpload_start_time() }~${i.getUpload_end_time() }</td>
+						</tr>
+		
+						</c:if>
+						</c:forEach>
+				<%
 						out.println("<tr>");
 						out.println("<font color='black' style='text-decoration: none;'><b>" + day++ + "</b></font>"
 								+ printToday(todayYear, year, todayMonth, month, todayDate, day));
@@ -117,14 +129,16 @@ a:hover {
 						out.println("</thead>");
 
 						out.println("<tbody>");
+						
 	%>
-	<c:forEach items="${Upload }" var="i">
-		<td class="name">${i.getUpload_name() }</td>
-		<td class="time">${i.getUpload_start_time() }~${i.getUpload_end_time() }</td>
-		<td class="time">${i.getUpload_class() }</td>
-	</c:forEach>
+	
+			
 	
 	<%
+	
+
+	
+	
 		out.println("<tr>");
 						out.println("<td>");
 						out.println("<a href ='" + RSV("상세보기", year, month, day)
@@ -135,9 +149,9 @@ a:hover {
 						out.println("</table>");
 	%>
 						
-						<input type="hidden" name="year" value="year"> 
+<!-- 					<input type="hidden" name="year" value="year"> 
 						<input type="hidden" name="month" value="month"> 
-						<input type="hidden" name="day" value="day">
+						<input type="hidden" name="day" value="day"> -->
 	<%									
 					}
 	
@@ -196,7 +210,19 @@ a:hover {
 			return "&nbsp;<b>Today</b>";
 		}
 		return "";
-	}%>
+	}
+	%>
+		
+	
+/* 	private String rsv_list(int syear,int smonth, int sday,int year, int month, int day, String name,String startTime, String endTime){
+		if(syear==year && smonth==month && sday==day){
+		
+			return "<b>'name'</b>&nbsp;'startTime'+'endTime'";
 
+		}
+	return "";		
+	} */
+	
+		
 </form>
 </html>

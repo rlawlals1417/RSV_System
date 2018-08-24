@@ -61,6 +61,8 @@ public class FrontController extends HttpServlet {
 			action.execute(request, response);
 			viewPage = "JSPCalendar.jsp";
 
+//			viewPage = "CalendarRR.jsp";
+
 		} else if (command.equals("edit.do")) {
 			action = new EditAction();
 			action.execute(request, response);

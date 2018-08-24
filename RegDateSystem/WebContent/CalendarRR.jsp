@@ -1,4 +1,3 @@
-!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=utf-8"%>
@@ -103,13 +102,23 @@ A:hover {
 	color: red;
 	text-decoration: none;
 }
+
+.tabL {
+    position: absolute;
+    right: 1em;
+}
+
+.tabR {
+	position: absolute;
+	left: 1em;
+}
 </style>
 
 </HEAD>
 
 <BODY>
 
-	<form name="calendarFrm" id="calendarFrm" action="" method="post">
+	<form action="<%=request.getContextPath()%>/cal.do" method="post">
 		<DIV id="content" style="width: 712px;">
 			<table width="100%" border="0" cellspacing="1" cellpadding="1">
 				<tr>
@@ -232,6 +241,7 @@ A:hover {
 								if (iUseDate == intToday) {
 									backColor = "#c9c9c9";
 								}
+								
 
 								out.println("<TD valign='top' align='left' height='92px' bgcolor='" + backColor + "' nowrap>");
 %>
@@ -240,10 +250,32 @@ A:hover {
 
 						</font>
 
-<%
+				<%
 							out.println("<BR>");
 								out.println(iUseDate);
-								out.println("<BR>");
+							out.println("<BR>");
+				
+		 					out.println("<BR>");
+								out.println(year+"년 "+(month+1)+"월 "+index+"일");
+							out.println("<BR>");
+								 
+					%>
+				
+		
+		 				<c:forEach items="${Upload }" var="i">
+						<c:if test="${i.getRyear() == year and i.getRmonth() == month  and i.getRday() == index }">
+						<div style= "text-align:left">${i.getUpload_name() }</div>
+						<div style="text-align:right">${i.getUpload_start_time() }~${i.getUpload_end_time() }</div>					
+						
+						</c:if>
+						<br>
+						</c:forEach>
+				
+					<input type="button" value="상세보기"
+		 			onclick="location.href='<%=request.getContextPath() %>/listCont.do?year='+<%=year %>+'&month='+<%=month+1 %>+'&day='+<%=index%>"/>
+		 
+				 	<% 		
+							out.println("<BR>");
 
 								//기능 제거 
 								out.println("</TD>");
